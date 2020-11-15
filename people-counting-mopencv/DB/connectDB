@@ -1,0 +1,18 @@
+import pandas as pd
+import pyodbc
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-ROECGEC;'
+                      'Database=SR_project;'
+                      'Trusted_Connection=yes;')
+
+cursor = conn.cursor()
+# cursor.execute('SELECT * FROM Users')
+#
+# for row in cursor:
+#     print(row)
+
+cursor.execute("INSERT INTO Users ( email, password, first_name, last_name ) VALUES (?,?,?,?)" ,('rut150998@gmail.com','111','uuuuu','v'))
+conn.commit()
+sql_query = pd.read_sql_query('SELECT * FROM SR_project.dbo.Users',conn)
+print(sql_query)
+print(type(sql_query))
